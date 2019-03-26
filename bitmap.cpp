@@ -1,15 +1,23 @@
 #include "bitmap.h"
+#include <iostream>
 #include <fstream>
 
 Bitmap::Bitmap(const char * filepath)
 {
 	std::ifstream file(filepath, std::ios::in | std::ios::binary);
 
-	char temp;
+	char m[2];
 
 	colorFactor = 0;
 
-	file.read(&temp, 2);
+	for(int i = 0; i < 2; i++)
+		file.read(&m[i], 1);
+
+	if(m[0] != 'B' && m[1] != 'M')
+	{
+		std::cout << "The file is not a bitmap image!!" << std::endl;
+		exit(3);
+	}
 
 	file.read((char *)&size, 4);
 	file.read((char *)&reserve1, 2);
