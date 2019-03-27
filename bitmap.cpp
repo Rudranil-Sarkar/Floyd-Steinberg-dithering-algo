@@ -13,7 +13,7 @@ Bitmap::Bitmap(const char * filepath)
 	for(int i = 0; i < 2; i++)
 		file.read(&m[i], 1);
 
-	if(m[0] != 'B' && m[1] != 'M')
+	if(m[0] != 'B' || m[1] != 'M')
 	{
 		std::cout << "The file is not a bitmap image!!" << std::endl;
 		exit(3);
